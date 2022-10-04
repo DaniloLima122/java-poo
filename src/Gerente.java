@@ -1,6 +1,7 @@
 import abstractClasses.Funcionario;
+import interfaces.alteraAdicional;
 
-public class Gerente extends Funcionario {
+public class Gerente extends Funcionario implements alteraAdicional {
     private double previdencia, adicional;
 
     public double getPrevidencia() {
@@ -24,10 +25,13 @@ public class Gerente extends Funcionario {
         this.setPrevidencia(0.07);
         this.setAdicional(adicional);
     }
-    public void alteraAdicional(double novo_percentual){
-        this.adicional = adicional*(1+novo_percentual);
-    }
+
     public double getSalario(){
         return(salario*((1- this.getPrevidencia())+ this.getAdicional()));
+    }
+
+    @Override
+    public void alteraAdicional(double novo_percentual) {
+        this.adicional = adicional*(1+novo_percentual);
     }
 }

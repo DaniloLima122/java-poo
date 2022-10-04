@@ -1,6 +1,7 @@
 import abstractClasses.Funcionario;
+import interfaces.alteraAdicional;
 
-public class Presidente extends Funcionario {
+public class Presidente extends Funcionario implements alteraAdicional {
 
     private double previdencia, adicional_whisky, adicional_helicoptero,
             adicional_adicional;
@@ -45,7 +46,7 @@ public class Presidente extends Funcionario {
         this.setAdicional_adicional(3.8);
 
     }
-    void alteraAdicional(double novo_percentual){
+    public void alteraAdicional(double novo_percentual){
         this.setAdicional_whisky(0.9*(1+novo_percentual));
         this.setAdicional_helicoptero(0.7*(1+novo_percentual));
         this.setAdicional_adicional(3.8*(1+novo_percentual));
