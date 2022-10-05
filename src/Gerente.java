@@ -32,6 +32,6 @@ public class Gerente extends Funcionario implements alteraAdicional {
 
     @Override
     public void alteraAdicional(double novo_percentual) {
-        this.adicional = adicional*(1+novo_percentual);
+        this.setAdicional(this.getAdicional() *(1+novo_percentual));
     }
 }

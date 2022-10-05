@@ -46,14 +46,15 @@ public class Presidente extends Funcionario implements alteraAdicional {
         this.setAdicional_adicional(3.8);
 
     }
-    public void alteraAdicional(double novo_percentual){
-        this.setAdicional_whisky(0.9*(1+novo_percentual));
-        this.setAdicional_helicoptero(0.7*(1+novo_percentual));
-        this.setAdicional_adicional(3.8*(1+novo_percentual));
-    }
     public double getSalario(){
         // Calcula o salário líquido
         return(salario*((1-this.getPrevidencia())+this.getAdicional_whisky()+
                 this.getAdicional_helicoptero()+this.getAdicional_adicional()));
+    }
+    @Override
+    public void alteraAdicional(double novo_percentual) {
+        this.setAdicional_whisky(0.9*(1+novo_percentual));
+        this.setAdicional_helicoptero(0.7*(1+novo_percentual));
+        this.setAdicional_adicional(3.8*(1+novo_percentual));
     }
 }
