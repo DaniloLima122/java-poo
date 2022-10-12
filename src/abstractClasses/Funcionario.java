@@ -25,6 +25,7 @@ public abstract class Funcionario {
         this.salario = salario;
     }
 
+    public Funcionario(){}
     public Funcionario(int ID, String nome, double salario) {
         this.setID(ID);
         this.setNome(nome);
