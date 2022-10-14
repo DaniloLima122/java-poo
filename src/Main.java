@@ -1,27 +1,37 @@
-import interfaces.iEmpresaService;
+import ConcreteUserOptionStratergies.AdicionarFuncionario;
+import ConcreteUserOptionStratergies.AumentarAdicionalDosFuncionarios;
+import ConcreteUserOptionStratergies.CalcularPagamento;
+import ConcreteUserOptionStratergies.GerarRelatorioDeFuncionarios;
 import objects.Estagiario;
+import objects.Gerente;
+import services.UserAction;
 import services.Empresa;
+import services.UserInteraction;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
+
 public class Main {
 
-    public static void main (String args[]){
-        System.out.println("teste");
+    public static void main(String[] args) throws Exception {
         Empresa _empresa = new Empresa();
 
-        List _funcionarios = new ArrayList();
+        Estagiario _estagiario = new Estagiario(1, "Luca Tomaz", 5000.00, 22);
+        Gerente _gerente = new Gerente(2, "Dan Lima", 5000.00, 0.5);
 
-        Estagiario _estagiario = new Estagiario();
+        _empresa.adicionarFuncionario(_estagiario);
+        _empresa.adicionarFuncionario(_gerente);
 
-        _estagiario.setID(1);
-        _estagiario.setNome("Luca Tomaz");
-        _estagiario.setSalario(5000.00);
-        _estagiario.setVale_coxinha(22);
+        List<UserAction> userActions = new ArrayList<UserAction>();
 
-        _funcionarios.add(_empresa.addFuncionario(_estagiario));
+        userActions.add(new UserAction(new AdicionarFuncionario(_empresa), "Adicionar um funcionário"));
+        userActions.add(new UserAction(new CalcularPagamento(_empresa), "Calcular pagamento do funcionário"));
+        userActions.add(new UserAction(new AumentarAdicionalDosFuncionarios(_empresa), "Aumentar o adicional de " +
+                "todos os funcionários elegíveis"));
+        userActions.add(new UserAction(new GerarRelatorioDeFuncionarios(_empresa), "Relatório dos funcionários da empresa"));
 
-        _funcionarios.forEach(_funcionario -> System.out.println(_funcionario));
+        new UserInteraction().startUserInteraction(userActions, true);
     }
 }
 

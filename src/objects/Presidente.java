@@ -1,9 +1,9 @@
 package objects;
 
 import abstractClasses.Funcionario;
-import interfaces.alteraAdicional;
+import interfaces.FuncionarioDeAltoCargo;
 
-public class Presidente extends Funcionario implements alteraAdicional {
+public class Presidente extends Funcionario implements FuncionarioDeAltoCargo {
 
     private double previdencia, adicional_whisky, adicional_helicoptero,
             adicional_adicional;
@@ -40,14 +40,12 @@ public class Presidente extends Funcionario implements alteraAdicional {
         this.adicional_adicional = adicional_adicional;
     }
 
-    public Presidente(){}
     public Presidente( int ID, String nome, double salario){
         super(ID, nome, salario);
         this.setPrevidencia(0.15);
         this.setAdicional_whisky(0.9);
         this.setAdicional_helicoptero(0.7);
         this.setAdicional_adicional(3.8);
-
     }
     public double getSalario(){
         // Calcula o salário líquido

@@ -14,7 +14,6 @@ public class Secretaria extends Funcionario {
         this.previdencia = previdencia;
     }
 
-    public Secretaria(){}
     public Secretaria(int ID, String nome, double salario){
         super(ID, nome, salario);
         // Desconto fixo de um sistema de previdência da empresa
