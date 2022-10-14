@@ -1,80 +1,78 @@
 package services;
 
-import interfaces.iEmpresaService;
-import objects.Estagiario;
-import objects.Gerente;
-import objects.Presidente;
-import objects.Secretaria;
+import abstractClasses.Funcionario;
+import interfaces.FuncionarioDeAltoCargo;
+import interfaces.IEmpresaService;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-public class Empresa implements iEmpresaService {
+public class Empresa implements IEmpresaService {
 
+    private final List<Funcionario> funcionarios = new ArrayList<Funcionario>();
 
     @Override
-    public ArrayList<Presidente> addFuncionario(Presidente presidente) {
-
-        Presidente _presidente = new Presidente();
-        ArrayList<Presidente> _presidentes = new ArrayList<Presidente>();
-
-        if (presidente != null)
-            _presidente = presidente;
-
-        _presidentes.add(_presidente);
-
-        return _presidentes;
+    public void adicionarFuncionario(Funcionario funcionario) {
+        this.funcionarios.add(funcionario);
     }
 
     @Override
-    public ArrayList<Gerente> addFuncionario(Gerente gerente) {
+    public double calcularSalario(int idFuncionario) {
+        Predicate<Funcionario> byId = funcionario -> funcionario.getID() == idFuncionario;
 
-        Gerente _gerente = new Gerente();
-        ArrayList<Gerente> _gerentes = new ArrayList<Gerente>();
+        List<Funcionario> filteredFuncionario = this.funcionarios.stream().filter(byId).collect(Collectors.toList());
 
-        if (gerente != null)
-            _gerente = gerente;
+        if(filteredFuncionario.size() == 0) return -1.0;
 
-        _gerentes.add(_gerente);
-
-        return _gerentes;
+        return filteredFuncionario.get(0).getSalario();
     }
 
     @Override
-    public List<Estagiario> addFuncionario(Estagiario estagiario) {
+    public void aumentarAdicionalDosFuncionarios(double percentual_aumento) {
 
-        Estagiario _estagiario = new Estagiario();
-        ArrayList<Estagiario> _estagiarios = new ArrayList<Estagiario>();
+        boolean validPercentual = percentual_aumento >= 0.0 && percentual_aumento <= 1.0;
 
-        if (estagiario != null)
-            _estagiario = estagiario;
+        if (validPercentual) {
 
-        _estagiarios.add(_estagiario);
-
-        return _estagiarios;
+            funcionarios.forEach(funcionario -> {
+                if (funcionario instanceof FuncionarioDeAltoCargo) {
+                    ((FuncionarioDeAltoCargo) funcionario).alteraAdicional(percentual_aumento);
+                }
+            });
+        }
     }
 
     @Override
-    public ArrayList<Secretaria> addFuncionario(Secretaria secretaria) {
+    public String relatorioDeFuncionarios() {
 
-        Secretaria _secretaria = new Secretaria();
-        ArrayList<Secretaria> _secretarias = new ArrayList<Secretaria>();
+        if(funcionarios.size() == 0) return "Nenhum funcionário cadastrado";
 
-        if (secretaria != null)
-            _secretaria = secretaria;
+        String funcionariosRelatorio = "";
 
-        _secretarias.add(_secretaria);
+        for (Funcionario funcionario : funcionarios) {
+            String funcionarioStr = "";
 
-        return _secretarias;
-    }
+            var lineSeparator = System.lineSeparator();
 
-    @Override
-    public void calcSalario(ArrayList arrayList, int id) {
+            funcionarioStr +=
+                    "Id: " + String.valueOf(funcionario.getID())
+                            .concat(lineSeparator)
+                            .concat("Nome: ")
+                            .concat(funcionario.getNome())
+                            .concat(lineSeparator)
+                            .concat("Salário: ")
+                            .concat(String.valueOf(funcionario.getSalario()))
+                            .concat(lineSeparator)
+                            .concat("-------------------");
 
-    }
+            funcionariosRelatorio += funcionarioStr.concat(lineSeparator);
+        }
 
-    @Override
-    public void incrSalario(ArrayList<Presidente> presidentes, double acrescimo) {
-
+        return funcionariosRelatorio;
     }
 }

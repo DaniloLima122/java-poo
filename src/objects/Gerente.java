@@ -1,9 +1,9 @@
 package objects;
 
 import abstractClasses.Funcionario;
-import interfaces.alteraAdicional;
+import interfaces.FuncionarioDeAltoCargo;
 
-public class Gerente extends Funcionario implements alteraAdicional {
+public class Gerente extends Funcionario implements FuncionarioDeAltoCargo {
     private double previdencia, adicional;
 
     public double getPrevidencia() {
@@ -22,7 +22,6 @@ public class Gerente extends Funcionario implements alteraAdicional {
         this.adicional = adicional;
     }
 
-    public Gerente(){}
     public Gerente(int ID, String nome, double salario, double adicional){
         super(ID, nome, salario);
         this.setPrevidencia(0.07);
