@@ -1,6 +1,6 @@
 package services;
 
-import UserOptionsContext.UserOptionContext;
+import stratergiesContexts.UserOptionContext;
 import interfaces.UserOption;
 
 public class UserAction {
