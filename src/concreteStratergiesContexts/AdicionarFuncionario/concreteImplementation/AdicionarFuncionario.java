@@ -5,7 +5,6 @@ import entities.Estagiario;
 import entities.Gerente;
 import entities.Presidente;
 import entities.Secretaria;
-import interfaces.CadastroFuncionarioBranch;
 import stratergiesContexts.AddFuncionariosContext;
 import interfaces.UserOption;
 import services.Empresa;
@@ -55,7 +54,7 @@ public class AdicionarFuncionario implements UserOption {
 
             Class filteredCargo = this.kindOfEmployees.stream()
                     .filter(cargoName ->
-                            UsefulMethods.compareCargos(cargoName.getSimpleName(),
+                            UsefulMethods.compareString(cargoName.getSimpleName(),
                             UsefulMethods.normalizeString(inputCargo)))
                     .findAny()
                     .orElse(null);
