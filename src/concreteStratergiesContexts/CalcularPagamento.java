@@ -4,6 +4,7 @@ package concreteStratergiesContexts;
 import interfaces.UserOption;
 import services.Empresa;
 
+import java.util.Locale;
 import java.util.Scanner;
 
 public class CalcularPagamento implements UserOption {
@@ -25,7 +26,7 @@ public class CalcularPagamento implements UserOption {
 
         while (invalidID) {
 
-            System.out.print("\nInforme um ID de funcionário válido: ");
+            System.out.print("\nInforme código de um funcionário válido: ");
 
             Scanner userIdScanner = new Scanner(System.in);
 
@@ -34,9 +35,11 @@ public class CalcularPagamento implements UserOption {
             salario = empresa.calcularSalario(userID);
 
             invalidID = userID == null || salario == -1;
-        };
+        }
 
-        System.out.print("\nSalario do funcionário com o ID " + userID + " é de R$" + salario + "\n");
+        String formatedSalario = String.format(Locale.GERMAN,"%,.2f", salario);
+
+        System.out.print("\nSalario do funcionário com o ID " + userID + " é de R$" + formatedSalario + "\n");
     }
 }
 

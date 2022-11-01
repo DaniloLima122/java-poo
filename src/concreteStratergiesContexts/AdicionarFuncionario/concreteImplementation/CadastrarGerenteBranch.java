@@ -18,16 +18,23 @@ public class CadastrarGerenteBranch extends AddFuncionarioCommonInputs implement
 
         Double adicional = null;
 
-        while(adicional == null || adicional < 0) {
-            System.out.println("Adicional do gerente: " + adicional);
-            adicional = scannGerente.nextDouble();
-        }
+        boolean invalidAdicional = true;
 
-        if ((Integer) this.ID == null) {
-            System.out.println("\nErro ao cadastrar gerente");
-            return null;
-        }else{
-            System.out.println("\nGerente cadastrado com sucesso");
+        while(invalidAdicional) {
+
+            try {
+
+                System.out.print("Adicional do gerente: " );
+
+                String adicionalGerente = scannGerente.next();
+
+                adicional = Double.parseDouble(adicionalGerente);
+
+                invalidAdicional = adicional == null || adicional < 0;
+            }
+            catch (Exception e){
+                invalidAdicional = true;
+            }
         }
 
         Funcionario gerente = new Gerente(this.ID, this.nome, this.salario, adicional);

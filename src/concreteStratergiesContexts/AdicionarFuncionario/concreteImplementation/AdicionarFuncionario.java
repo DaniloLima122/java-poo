@@ -19,10 +19,10 @@ public class AdicionarFuncionario implements UserOption {
 
     List<Class> kindOfEmployees = new ArrayList<Class>();
 
-    private final Empresa empresa;
+    public static Empresa empresa = null;
 
     public AdicionarFuncionario(final Empresa empresa) {
-        this.empresa = empresa;
+        AdicionarFuncionario.empresa = empresa;
 
         this.kindOfEmployees.add(Estagiario.class);
         this.kindOfEmployees.add(Gerente.class);
@@ -39,18 +39,15 @@ public class AdicionarFuncionario implements UserOption {
 
         boolean invalidCargo = true;
 
-        System.out.println("\nInforme os dados do funcionário abaixo");
+        System.out.println("\nInforme os dados do funcionário abaixo\n");
 
         while (invalidCargo) {
 
-            System.out.print("\nCargo: ");
+            System.out.print("Cargo: ");
 
             Scanner cargoScan = new Scanner(System.in);
 
             String inputCargo = cargoScan.next();
-
-            String normalizedInputCargo = Normalizer.normalize(inputCargo, Normalizer.Form.NFD)
-                    .replaceAll("[^\\p{ASCII}]", "").toString();
 
             Class filteredCargo = this.kindOfEmployees.stream()
                     .filter(cargoName ->
@@ -71,6 +68,22 @@ public class AdicionarFuncionario implements UserOption {
 
         Funcionario funcionario = funcionarioContext.cadastrarFuncionario();
 
-        empresa.adicionarFuncionario(funcionario);
+        Funcionario funcionarioCadastrado = empresa.adicionarFuncionario(funcionario);
+
+        if((Integer) funcionarioCadastrado.getID() != null){
+            System.out.println("\n" + UsefulMethods.capitalize(cargo.getSimpleName()) + " cadastrado(a) com sucesso!");
+        }else {
+            System.out.println("\nErro ao cadastrar " + cargo + ", tente novamente.");
+        }
+
+    }
+
+    public static boolean funcionarioAlreadyExists(int id){
+
+        List<Funcionario> filteredFuncionario =
+                AdicionarFuncionario.empresa.funcionarios.stream()
+                .filter(funcionario ->  id == funcionario.getID()).toList();
+
+        return filteredFuncionario.size() > 0;
     }
 }

@@ -19,6 +19,6 @@ public class Estagiario extends Funcionario {
     }
     public double getSalario(){
         // Calcula o salário líquido
-        return(super.salario+this.getVale_coxinha());
+        return(this.salario+this.getVale_coxinha());
     }
 }

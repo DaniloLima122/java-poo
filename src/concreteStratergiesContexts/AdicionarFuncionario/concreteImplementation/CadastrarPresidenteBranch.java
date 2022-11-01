@@ -13,15 +13,8 @@ public class CadastrarPresidenteBranch extends AddFuncionarioCommonInputs implem
 
         this.getFuncionariosCommonData("Presidente");
 
-        if ((Integer) this.ID == null) {
-            System.out.println("\nErro ao cadastrar presidente");
-            return null;
-        }else {
-            System.out.println("\nPresidente cadastrado com sucesso");
-        }
+        Funcionario presidente = new Presidente(this.ID, this.nome, this.salario);
 
-        Funcionario estagiario = new Presidente(this.ID, this.nome, this.salario);
-
-        return estagiario;
+        return presidente;
     }
 }

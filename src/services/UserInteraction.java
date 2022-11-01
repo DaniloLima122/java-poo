@@ -16,6 +16,7 @@ public class UserInteraction {
                 int optionNumber = -1;
                 boolean invalidOption = true;
 
+                System.out.print("----------");
                 System.out.print("\nBem vindo!\n\n");
 
                 for (UserAction action : userActionsList) {

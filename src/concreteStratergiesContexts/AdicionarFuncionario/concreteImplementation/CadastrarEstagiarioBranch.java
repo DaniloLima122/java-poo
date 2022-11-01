@@ -19,16 +19,23 @@ public class CadastrarEstagiarioBranch extends AddFuncionarioCommonInputs implem
 
         double vale_coxinha = -1;
 
-        while((Double) vale_coxinha == null || vale_coxinha < 0) {
-            System.out.println("Valor do vale coxinha: " + vale_coxinha);
-            vale_coxinha = scannGerente.nextDouble();
-        }
+        boolean invalid_vale_coxinha = true;
 
-        if ((Integer) this.ID == null) {
-            System.out.println("Erro ao cadastrar estagiário");
-            return null;
-        }else{
-            System.out.println("Estagiário cadastrado com sucesso");
+        while((Double) vale_coxinha == null || vale_coxinha < 0) {
+
+            try {
+
+                System.out.print("Valor do vale coxinha: " );
+
+                String valeCoxinha = scannGerente.next();
+
+                vale_coxinha = Double.parseDouble(valeCoxinha);
+
+                invalid_vale_coxinha = valeCoxinha == null || vale_coxinha < 0;
+            }
+            catch (Exception e){
+                invalid_vale_coxinha = true;
+            }
         }
 
         Funcionario estagiario = new Estagiario(this.ID, this.nome, this.salario, vale_coxinha);

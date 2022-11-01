@@ -1,5 +1,6 @@
 package concreteStratergiesContexts;
 
+import concreteStratergiesContexts.AdicionarFuncionario.concreteImplementation.AdicionarFuncionario;
 import interfaces.UserOption;
 import services.Empresa;
 
@@ -16,21 +17,31 @@ public class AumentarAdicionalDosFuncionarios implements UserOption {
     @Override
     public void executeOption() {
 
-        double percentage = 2.0;
+        double percentage = -1;
 
         boolean invalidPercentage = true;
 
+        Scanner percentualScanner = new Scanner(System.in);
+
         while (invalidPercentage) {
 
-            System.out.print("\nInforme a porcentagem de aumento (entre 0 e 1): ");
+            try {
 
-            Scanner userIdScanner = new Scanner(System.in);
+                System.out.print("\nInforme a porcentagem de aumento (entre 0 e 1): ");
 
-            percentage = userIdScanner.nextDouble();
+                String percentageValue = percentualScanner.next();
 
-            invalidPercentage = percentage < 0 || percentage > 1;
+                percentage = Double.parseDouble(percentageValue);
+
+                invalidPercentage = percentage < 0 || percentage > 1;
+
+                this.empresa.aumentarAdicionalDosFuncionarios(percentage);
+            }
+            catch (Exception e){
+                invalidPercentage = true;
+            }
         };
 
-        System.out.print("\nPercentual de aumento de " + percentage + "% aplicado para os funcionários elegíveis");
+        System.out.print("\nPercentual de aumento de " + percentage + "% aplicado para os funcionários elegíveis\n");
     }
 }

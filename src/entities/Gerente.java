@@ -29,7 +29,7 @@ public class Gerente extends Funcionario implements FuncionarioDeAltoCargo {
     }
 
     public double getSalario(){
-        return(salario*((1- this.getPrevidencia())+ this.getAdicional()));
+        return(salario*((1 - this.getPrevidencia())+ this.getAdicional()));
     }
 
     @Override

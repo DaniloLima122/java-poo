@@ -7,6 +7,7 @@ import interfaces.IEmpresaService;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Locale;
 import java.util.function.Predicate;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
@@ -14,11 +15,12 @@ import java.util.stream.Stream;
 
 public class Empresa implements IEmpresaService {
 
-    private final List<Funcionario> funcionarios = new ArrayList<Funcionario>();
+    public final List<Funcionario> funcionarios = new ArrayList<Funcionario>();
 
     @Override
-    public void adicionarFuncionario(Funcionario funcionario) {
+    public Funcionario adicionarFuncionario(Funcionario funcionario) {
         this.funcionarios.add(funcionario);
+        return funcionario;
     }
 
     @Override
@@ -65,8 +67,8 @@ public class Empresa implements IEmpresaService {
                             .concat("Nome: ")
                             .concat(funcionario.getNome())
                             .concat(lineSeparator)
-                            .concat("Salário: ")
-                            .concat(String.valueOf(funcionario.getSalario()))
+                            .concat("Salário: R$")
+                            .concat(String.format(Locale.GERMAN,"%,.2f", funcionario.getSalario()))
                             .concat(lineSeparator)
                             .concat("-------------------");
 
