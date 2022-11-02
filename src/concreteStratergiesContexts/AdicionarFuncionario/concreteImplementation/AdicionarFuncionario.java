@@ -1,6 +1,14 @@
 package concreteStratergiesContexts.AdicionarFuncionario.concreteImplementation;
 
+<<<<<<< HEAD
 import entities.*;
+=======
+import abstractClasses.Funcionario;
+import entities.Estagiario;
+import entities.Gerente;
+import entities.Presidente;
+import entities.Secretaria;
+>>>>>>> 899bd28a7a860daf1007b2cfeb9967fb6f68b9c2
 import stratergiesContexts.AddFuncionariosContext;
 import interfaces.UserOption;
 import services.Empresa;
