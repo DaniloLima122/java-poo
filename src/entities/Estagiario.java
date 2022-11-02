@@ -1,8 +1,8 @@
 package entities;
 
-import abstractClasses.Funcionario;
+import abstractClasses.AbstractFuncionario;
 
-public class Estagiario extends Funcionario {
+public class Estagiario extends AbstractFuncionario {
     private double vale_coxinha;
 
     public double getVale_coxinha() {

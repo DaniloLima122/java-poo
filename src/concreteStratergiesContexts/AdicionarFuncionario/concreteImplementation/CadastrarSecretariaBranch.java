@@ -1,20 +1,17 @@
 package concreteStratergiesContexts.AdicionarFuncionario.concreteImplementation;
 
-import abstractClasses.Funcionario;
+import abstractClasses.AbstractFuncionario;
 import concreteStratergiesContexts.AdicionarFuncionario.common.AddFuncionarioCommonInputs;
-import entities.Estagiario;
 import entities.Secretaria;
 import interfaces.CadastroFuncionarioBranch;
-
-import java.util.Scanner;
 
 public class CadastrarSecretariaBranch extends AddFuncionarioCommonInputs implements CadastroFuncionarioBranch {
 
     @Override
-    public Funcionario cadastrar() {
+    public AbstractFuncionario cadastrar() {
         this.getFuncionariosCommonData("Secretária");
 
-        Funcionario secretaria = new Secretaria(this.ID, this.nome, this.salario);
+        AbstractFuncionario secretaria = new Secretaria(this.ID, this.nome, this.salario);
 
         return secretaria;
     }

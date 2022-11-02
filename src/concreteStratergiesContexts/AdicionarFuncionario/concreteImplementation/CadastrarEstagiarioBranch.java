@@ -1,9 +1,9 @@
 package concreteStratergiesContexts.AdicionarFuncionario.concreteImplementation;
 
-import abstractClasses.Funcionario;
+import abstractClasses.AbstractFuncionario;
 import concreteStratergiesContexts.AdicionarFuncionario.common.AddFuncionarioCommonInputs;
 import entities.Estagiario;
-import entities.Gerente;
+import entities.Funcionario;
 import interfaces.CadastroFuncionarioBranch;
 
 import java.util.Scanner;
@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class CadastrarEstagiarioBranch extends AddFuncionarioCommonInputs implements CadastroFuncionarioBranch {
 
     @Override
-    public Funcionario cadastrar() {
+    public AbstractFuncionario cadastrar() {
 
         this.getFuncionariosCommonData("Estagiário");
 
@@ -38,7 +38,7 @@ public class CadastrarEstagiarioBranch extends AddFuncionarioCommonInputs implem
             }
         }
 
-        Funcionario estagiario = new Estagiario(this.ID, this.nome, this.salario, vale_coxinha);
+        AbstractFuncionario estagiario = new Estagiario(this.ID, this.nome, this.salario, vale_coxinha);
 
         return estagiario;
     }

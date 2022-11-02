@@ -1,9 +1,9 @@
 package entities;
 
-import abstractClasses.Funcionario;
+import abstractClasses.AbstractFuncionario;
 import interfaces.FuncionarioDeAltoCargo;
 
-public class Presidente extends Funcionario implements FuncionarioDeAltoCargo {
+public class Presidente extends AbstractFuncionario implements FuncionarioDeAltoCargo {
 
     private double previdencia, adicional_whisky, adicional_helicoptero,
             adicional_adicional;

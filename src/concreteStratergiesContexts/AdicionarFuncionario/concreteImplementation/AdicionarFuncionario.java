@@ -1,14 +1,11 @@
 package concreteStratergiesContexts.AdicionarFuncionario.concreteImplementation;
 
-<<<<<<< HEAD
+import abstractClasses.AbstractFuncionario;
 import entities.*;
-=======
-import abstractClasses.Funcionario;
 import entities.Estagiario;
 import entities.Gerente;
 import entities.Presidente;
 import entities.Secretaria;
->>>>>>> 899bd28a7a860daf1007b2cfeb9967fb6f68b9c2
 import stratergiesContexts.AddFuncionariosContext;
 import interfaces.UserOption;
 import services.Empresa;
@@ -41,7 +38,7 @@ public class AdicionarFuncionario implements UserOption {
 
         boolean invalidCargo = true;
 
-        System.out.println("\nInforme os dados do funcionário abaixo\n");
+        System.out.println("\nInforme abaixo os dados do funcionario\n");
 
         while (invalidCargo) {
 
@@ -68,9 +65,9 @@ public class AdicionarFuncionario implements UserOption {
 
         funcionarioContext.setContext(cargo);
 
-        abstractClasses.Funcionario funcionario = funcionarioContext.cadastrarFuncionario();
+        AbstractFuncionario funcionario = funcionarioContext.cadastrarFuncionario();
 
-        abstractClasses.Funcionario funcionarioCadastrado = empresa.adicionarFuncionario(funcionario);
+        AbstractFuncionario funcionarioCadastrado = empresa.adicionarFuncionario(funcionario);
 
         if((Integer) funcionarioCadastrado.getID() != null){
             System.out.println("\n" + UsefulMethods.capitalize(cargo.getSimpleName()) + " cadastrado(a) com sucesso!");
@@ -82,7 +79,7 @@ public class AdicionarFuncionario implements UserOption {
 
     public static boolean funcionarioAlreadyExists(int id){
 
-        List<abstractClasses.Funcionario> filteredFuncionario =
+        List<AbstractFuncionario> filteredFuncionario =
                 AdicionarFuncionario.empresa.funcionarios.stream()
                 .filter(funcionario ->  id == funcionario.getID()).toList();
 

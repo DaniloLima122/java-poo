@@ -1,6 +1,7 @@
 package services;
 
-import abstractClasses.Funcionario;
+import abstractClasses.AbstractFuncionario;
+import entities.Funcionario;
 import interfaces.FuncionarioDeAltoCargo;
 import interfaces.EmpresaService;
 
@@ -12,19 +13,19 @@ import java.util.stream.Collectors;
 
 public class Empresa implements EmpresaService {
 
-    public final List<Funcionario> funcionarios = new ArrayList<Funcionario>();
+    public final List<AbstractFuncionario> funcionarios = new ArrayList<AbstractFuncionario>();
 
     @Override
-    public Funcionario adicionarFuncionario(Funcionario funcionario) {
+    public AbstractFuncionario adicionarFuncionario(AbstractFuncionario funcionario) {
         this.funcionarios.add(funcionario);
         return funcionario;
     }
 
     @Override
     public double calcularSalario(int idFuncionario) {
-        Predicate<Funcionario> byId = funcionario -> funcionario.getID() == idFuncionario;
+        Predicate<AbstractFuncionario> byId = funcionario -> funcionario.getID() == idFuncionario;
 
-        List<Funcionario> filteredFuncionario = this.funcionarios.stream().filter(byId).collect(Collectors.toList());
+        List<AbstractFuncionario> filteredFuncionario = this.funcionarios.stream().filter(byId).collect(Collectors.toList());
 
         if(filteredFuncionario.size() == 0) return -1.0;
 
@@ -53,7 +54,7 @@ public class Empresa implements EmpresaService {
 
         String funcionariosRelatorio = "";
 
-        for (Funcionario funcionario : funcionarios) {
+        for (AbstractFuncionario funcionario : funcionarios) {
             String funcionarioStr = "";
 
             var lineSeparator = System.lineSeparator();

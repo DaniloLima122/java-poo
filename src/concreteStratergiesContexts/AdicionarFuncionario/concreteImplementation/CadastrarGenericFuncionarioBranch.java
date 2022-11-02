@@ -6,10 +6,10 @@ import interfaces.CadastroFuncionarioBranch;
 
 public class CadastrarGenericFuncionarioBranch extends AddFuncionarioCommonInputs implements CadastroFuncionarioBranch {
     @Override
-    public abstractClasses.Funcionario cadastrar() {
-        this.getFuncionariosCommonData("Funcionário");
+    public Funcionario cadastrar() {
+        this.getFuncionariosCommonData("Funcionário(a)");
 
-        abstractClasses.Funcionario funcionario = new Funcionario(this.ID, this.nome, this.salario);
+        Funcionario funcionario = new Funcionario(this.ID, this.nome, this.salario);
 
         return funcionario;
     }

@@ -1,7 +1,8 @@
 package stratergiesContexts;
 
-import abstractClasses.Funcionario;
+import abstractClasses.AbstractFuncionario;
 import concreteStratergiesContexts.AdicionarFuncionario.concreteImplementation.*;
+import entities.Funcionario;
 import interfaces.CadastroFuncionarioBranch;
 
 import java.util.ArrayList;
@@ -42,7 +43,7 @@ public class AddFuncionariosContext {
         this.funcionarioType = funcionarioType;
     }
 
-    public Funcionario cadastrarFuncionario() {
+    public AbstractFuncionario cadastrarFuncionario() {
         String funcionarioType = this.funcionarioType.getSimpleName().toLowerCase();
         CadastroFuncionarioBranch routineForDispatch = this.cadastroBranches.get(funcionarioType);
         return routineForDispatch.cadastrar();
