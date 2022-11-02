@@ -16,6 +16,7 @@ public class UserInteraction {
                 int optionNumber = -1;
                 boolean invalidOption = true;
 
+                System.out.print("----------");
                 System.out.print("\nBem vindo!\n\n");
 
                 for (UserAction action : userActionsList) {
@@ -26,10 +27,20 @@ public class UserInteraction {
 
                     System.out.print("\nEscolha uma das opções acima digitando o número correspondente: ");
 
-                    Scanner option = new Scanner(System.in);
-                    optionNumber = option.nextInt();
+                    Scanner optionScanner = new Scanner(System.in);
 
-                    invalidOption = optionNumber < 1 || optionNumber > userActionsList.size();
+                    try {
+
+                        String optinScanned = optionScanner.next();
+
+                        optionNumber = Integer.parseInt(optinScanned);
+
+                        invalidOption = optionNumber < 1 || optionNumber > userActionsList.size();
+
+                    }
+                    catch(Exception e) {
+                        invalidOption = true;
+                    }
 
                 } while (invalidOption);
 

@@ -1,9 +1,9 @@
 package entities;
 
-import abstractClasses.Funcionario;
+import abstractClasses.AbstractFuncionario;
 import interfaces.FuncionarioDeAltoCargo;
 
-public class Gerente extends Funcionario implements FuncionarioDeAltoCargo {
+public class Gerente extends AbstractFuncionario implements FuncionarioDeAltoCargo {
     private double previdencia, adicional;
 
     public double getPrevidencia() {
@@ -29,7 +29,7 @@ public class Gerente extends Funcionario implements FuncionarioDeAltoCargo {
     }
 
     public double getSalario(){
-        return(salario*((1- this.getPrevidencia())+ this.getAdicional()));
+        return(salario*((1 - this.getPrevidencia())+ this.getAdicional()));
     }
 
     @Override

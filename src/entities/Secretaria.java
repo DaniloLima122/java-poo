@@ -1,11 +1,10 @@
 package entities;
 
-import abstractClasses.Funcionario;
 
-public class Secretaria extends Funcionario {
+import abstractClasses.AbstractFuncionario;
 
+public class Secretaria extends AbstractFuncionario {
     private double previdencia;
-
     public double getPrevidencia() {
         return previdencia;
     }

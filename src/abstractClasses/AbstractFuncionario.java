@@ -1,6 +1,6 @@
 package abstractClasses;
 
-public abstract class Funcionario {
+public abstract class AbstractFuncionario {
     protected int ID;
     protected String nome;
     protected double salario;
@@ -25,7 +25,7 @@ public abstract class Funcionario {
         this.salario = salario;
     }
 
-    public Funcionario(int ID, String nome, double salario) {
+    public AbstractFuncionario(int ID, String nome, double salario) {
         this.setID(ID);
         this.setNome(nome);
         this.setSalario(salario);

@@ -1,14 +1,8 @@
 package stratergiesContexts;
 
-import abstractClasses.Funcionario;
-import concreteStratergiesContexts.AdicionarFuncionario.concreteImplementation.CadastrarEstagiarioBranch;
-import concreteStratergiesContexts.AdicionarFuncionario.concreteImplementation.CadastrarGerenteBranch;
-import concreteStratergiesContexts.AdicionarFuncionario.concreteImplementation.CadastrarPresidenteBranch;
-import concreteStratergiesContexts.AdicionarFuncionario.concreteImplementation.CadastrarSecretariaBranch;
-import entities.Estagiario;
-import entities.Gerente;
-import entities.Presidente;
-import entities.Secretaria;
+import abstractClasses.AbstractFuncionario;
+import concreteStratergiesContexts.AdicionarFuncionario.concreteImplementation.*;
+import entities.Funcionario;
 import interfaces.CadastroFuncionarioBranch;
 
 import java.util.ArrayList;
@@ -20,7 +14,6 @@ public class AddFuncionariosContext {
     private Class funcionarioType;
 
     List<Class> kindOfEmployees = new ArrayList<Class>();
-
     private List<CadastroFuncionarioBranch> kindOfEmployeesRoutines = new ArrayList<CadastroFuncionarioBranch>();
     private Map<String, CadastroFuncionarioBranch> cadastroBranches = new HashMap<>();
 
@@ -36,6 +29,7 @@ public class AddFuncionariosContext {
         this.kindOfEmployeesRoutines.add(new CadastrarGerenteBranch());
         this.kindOfEmployeesRoutines.add(new CadastrarPresidenteBranch());
         this.kindOfEmployeesRoutines.add(new CadastrarSecretariaBranch());
+        this.kindOfEmployeesRoutines.add(new CadastrarGenericFuncionarioBranch());
     }
 
     private void buildEmployeesActionsHashmap(){
@@ -49,7 +43,7 @@ public class AddFuncionariosContext {
         this.funcionarioType = funcionarioType;
     }
 
-    public Funcionario cadastrarFuncionario() {
+    public AbstractFuncionario cadastrarFuncionario() {
         String funcionarioType = this.funcionarioType.getSimpleName().toLowerCase();
         CadastroFuncionarioBranch routineForDispatch = this.cadastroBranches.get(funcionarioType);
         return routineForDispatch.cadastrar();

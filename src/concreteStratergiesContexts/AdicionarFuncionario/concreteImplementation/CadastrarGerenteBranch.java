@@ -1,6 +1,6 @@
 package concreteStratergiesContexts.AdicionarFuncionario.concreteImplementation;
 
-import abstractClasses.Funcionario;
+import abstractClasses.AbstractFuncionario;
 import concreteStratergiesContexts.AdicionarFuncionario.common.AddFuncionarioCommonInputs;
 import entities.Gerente;
 import interfaces.CadastroFuncionarioBranch;
@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class CadastrarGerenteBranch extends AddFuncionarioCommonInputs implements CadastroFuncionarioBranch {
 
     @Override
-    public Funcionario cadastrar() {
+    public AbstractFuncionario cadastrar() {
 
         this.getFuncionariosCommonData("Gerente");
 
@@ -18,19 +18,26 @@ public class CadastrarGerenteBranch extends AddFuncionarioCommonInputs implement
 
         Double adicional = null;
 
-        while(adicional == null || adicional < 0) {
-            System.out.println("Adicional do gerente: " + adicional);
-            adicional = scannGerente.nextDouble();
+        boolean invalidAdicional = true;
+
+        while(invalidAdicional) {
+
+            try {
+
+                System.out.print("Adicional do gerente: " );
+
+                String adicionalGerente = scannGerente.next();
+
+                adicional = Double.parseDouble(adicionalGerente);
+
+                invalidAdicional = adicional == null || adicional < 0;
+            }
+            catch (Exception e){
+                invalidAdicional = true;
+            }
         }
 
-        if ((Integer) this.ID == null) {
-            System.out.println("\nErro ao cadastrar gerente");
-            return null;
-        }else{
-            System.out.println("\nGerente cadastrado com sucesso");
-        }
-
-        Funcionario gerente = new Gerente(this.ID, this.nome, this.salario, adicional);
+        AbstractFuncionario gerente = new Gerente(this.ID, this.nome, this.salario, adicional);
 
         return gerente;
     }

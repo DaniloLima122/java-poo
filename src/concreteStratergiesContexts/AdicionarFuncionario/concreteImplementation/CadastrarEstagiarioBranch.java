@@ -1,9 +1,9 @@
 package concreteStratergiesContexts.AdicionarFuncionario.concreteImplementation;
 
-import abstractClasses.Funcionario;
+import abstractClasses.AbstractFuncionario;
 import concreteStratergiesContexts.AdicionarFuncionario.common.AddFuncionarioCommonInputs;
 import entities.Estagiario;
-import entities.Gerente;
+import entities.Funcionario;
 import interfaces.CadastroFuncionarioBranch;
 
 import java.util.Scanner;
@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class CadastrarEstagiarioBranch extends AddFuncionarioCommonInputs implements CadastroFuncionarioBranch {
 
     @Override
-    public Funcionario cadastrar() {
+    public AbstractFuncionario cadastrar() {
 
         this.getFuncionariosCommonData("Estagiário");
 
@@ -19,19 +19,26 @@ public class CadastrarEstagiarioBranch extends AddFuncionarioCommonInputs implem
 
         double vale_coxinha = -1;
 
-        while((Double) vale_coxinha == null || vale_coxinha < 0) {
-            System.out.println("Valor do vale coxinha: " + vale_coxinha);
-            vale_coxinha = scannGerente.nextDouble();
+        boolean invalid_vale_coxinha = true;
+
+        while(invalid_vale_coxinha) {
+
+            try {
+
+                System.out.print("Valor do vale coxinha: " );
+
+                String valeCoxinha = scannGerente.next();
+
+                vale_coxinha = Double.parseDouble(valeCoxinha);
+
+                invalid_vale_coxinha = valeCoxinha == null || vale_coxinha < 0;
+            }
+            catch (Exception e){
+                invalid_vale_coxinha = true;
+            }
         }
 
-        if ((Integer) this.ID == null) {
-            System.out.println("Erro ao cadastrar estagiário");
-            return null;
-        }else{
-            System.out.println("Estagiário cadastrado com sucesso");
-        }
-
-        Funcionario estagiario = new Estagiario(this.ID, this.nome, this.salario, vale_coxinha);
+        AbstractFuncionario estagiario = new Estagiario(this.ID, this.nome, this.salario, vale_coxinha);
 
         return estagiario;
     }

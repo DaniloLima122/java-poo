@@ -1,10 +1,10 @@
 package concreteStratergiesContexts.AdicionarFuncionario.common;
 
+import concreteStratergiesContexts.AdicionarFuncionario.concreteImplementation.AdicionarFuncionario;
+
 import java.util.Scanner;
 
 public class AddFuncionarioCommonInputs extends CommonData {
-
-    private boolean invalidData = true;
 
     public void getFuncionariosCommonData(String cargo){
         Scanner commonDataScan = new Scanner(System.in);
@@ -12,18 +12,31 @@ public class AddFuncionarioCommonInputs extends CommonData {
         boolean invalidID = true;
 
         while(invalidID){
-            System.out.print("Código do " + cargo + ": ");
 
-            this.ID = commonDataScan.nextInt();
+            try {
+                System.out.print("Código do(a) " + cargo + ": ");
 
-            invalidID = (Integer) this.ID == null;
+                String id = commonDataScan.next();
+
+                this.ID = Integer.parseInt(id);
+
+                boolean funcionarioAlearyExists = AdicionarFuncionario.funcionarioAlreadyExists((this.ID));
+
+                if(funcionarioAlearyExists) {
+                    System.out.print("\nJá existe um funcionário cadastrado com esse código, tente novamente!\n\n");
+                }
+
+                invalidID = funcionarioAlearyExists;
+            }
+            catch (Exception e){
+                invalidID = true;
+            }
         }
-
 
         boolean invalidName = true;
 
         while(invalidName){
-            System.out.print("Nome do " + cargo + ": ");
+            System.out.print("Nome do(a) " + cargo + ": ");
 
             this.nome = commonDataScan.next();
 
@@ -34,11 +47,19 @@ public class AddFuncionarioCommonInputs extends CommonData {
         boolean invalidSalario =  true;
 
         while(invalidSalario){
-            System.out.print("Salario: ");
+            System.out.print("Salario do(a) " + cargo + ": ");
 
-            this.salario = commonDataScan.nextDouble();
+            String salario = commonDataScan.next();
 
-            invalidSalario = (Double) this.salario == null || salario <= 0;
+            try {
+                this.salario = Double.parseDouble(salario);
+                invalidSalario = false;
+            }
+            catch (Exception e){
+                invalidSalario = true;
+            }
+
+            invalidSalario = (Double) this.salario == null || this.salario <= 0;
         }
     }
 }

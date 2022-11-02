@@ -1,7 +1,7 @@
 package interfaces;
 
-import abstractClasses.Funcionario;
+import abstractClasses.AbstractFuncionario;
 
 public interface CadastroFuncionarioBranch {
-    Funcionario cadastrar();
+    AbstractFuncionario cadastrar();
 }

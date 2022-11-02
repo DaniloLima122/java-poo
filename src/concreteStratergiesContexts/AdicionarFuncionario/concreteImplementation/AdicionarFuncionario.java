@@ -1,6 +1,7 @@
 package concreteStratergiesContexts.AdicionarFuncionario.concreteImplementation;
 
-import abstractClasses.Funcionario;
+import abstractClasses.AbstractFuncionario;
+import entities.*;
 import entities.Estagiario;
 import entities.Gerente;
 import entities.Presidente;
@@ -9,8 +10,6 @@ import stratergiesContexts.AddFuncionariosContext;
 import interfaces.UserOption;
 import services.Empresa;
 import utils.UsefulMethods;
-
-import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -19,16 +18,16 @@ public class AdicionarFuncionario implements UserOption {
 
     List<Class> kindOfEmployees = new ArrayList<Class>();
 
-    private final Empresa empresa;
+    public static Empresa empresa = null;
 
     public AdicionarFuncionario(final Empresa empresa) {
-        this.empresa = empresa;
+        AdicionarFuncionario.empresa = empresa;
 
         this.kindOfEmployees.add(Estagiario.class);
         this.kindOfEmployees.add(Gerente.class);
         this.kindOfEmployees.add(Presidente.class);
         this.kindOfEmployees.add(Secretaria.class);
-
+        this.kindOfEmployees.add(Funcionario.class);
     }
 
     @Override
@@ -39,25 +38,22 @@ public class AdicionarFuncionario implements UserOption {
 
         boolean invalidCargo = true;
 
-        System.out.println("\nInforme os dados do funcionário abaixo");
+        System.out.println("\nInforme abaixo os dados do funcionario\n");
 
         while (invalidCargo) {
 
-            System.out.print("\nCargo: ");
+            System.out.print("Cargo: ");
 
             Scanner cargoScan = new Scanner(System.in);
 
             String inputCargo = cargoScan.next();
-
-            String normalizedInputCargo = Normalizer.normalize(inputCargo, Normalizer.Form.NFD)
-                    .replaceAll("[^\\p{ASCII}]", "").toString();
 
             Class filteredCargo = this.kindOfEmployees.stream()
                     .filter(cargoName ->
                             UsefulMethods.compareString(cargoName.getSimpleName(),
                             UsefulMethods.normalizeString(inputCargo)))
                     .findAny()
-                    .orElse(null);
+                    .orElse(Funcionario.class);
             cargo = filteredCargo;
 
             invalidCargo =
@@ -69,8 +65,24 @@ public class AdicionarFuncionario implements UserOption {
 
         funcionarioContext.setContext(cargo);
 
-        Funcionario funcionario = funcionarioContext.cadastrarFuncionario();
+        AbstractFuncionario funcionario = funcionarioContext.cadastrarFuncionario();
 
-        empresa.adicionarFuncionario(funcionario);
+        AbstractFuncionario funcionarioCadastrado = empresa.adicionarFuncionario(funcionario);
+
+        if((Integer) funcionarioCadastrado.getID() != null){
+            System.out.println("\n" + UsefulMethods.capitalize(cargo.getSimpleName()) + " cadastrado(a) com sucesso!");
+        }else {
+            System.out.println("\nErro ao cadastrar " + cargo + ", tente novamente.");
+        }
+
+    }
+
+    public static boolean funcionarioAlreadyExists(int id){
+
+        List<AbstractFuncionario> filteredFuncionario =
+                AdicionarFuncionario.empresa.funcionarios.stream()
+                .filter(funcionario ->  id == funcionario.getID()).toList();
+
+        return filteredFuncionario.size() > 0;
     }
 }
