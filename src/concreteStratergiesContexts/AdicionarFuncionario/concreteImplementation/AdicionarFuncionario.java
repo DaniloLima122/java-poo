@@ -1,16 +1,10 @@
 package concreteStratergiesContexts.AdicionarFuncionario.concreteImplementation;
 
-import abstractClasses.Funcionario;
-import entities.Estagiario;
-import entities.Gerente;
-import entities.Presidente;
-import entities.Secretaria;
+import entities.*;
 import stratergiesContexts.AddFuncionariosContext;
 import interfaces.UserOption;
 import services.Empresa;
 import utils.UsefulMethods;
-
-import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -28,7 +22,7 @@ public class AdicionarFuncionario implements UserOption {
         this.kindOfEmployees.add(Gerente.class);
         this.kindOfEmployees.add(Presidente.class);
         this.kindOfEmployees.add(Secretaria.class);
-
+        this.kindOfEmployees.add(Funcionario.class);
     }
 
     @Override
@@ -54,7 +48,7 @@ public class AdicionarFuncionario implements UserOption {
                             UsefulMethods.compareString(cargoName.getSimpleName(),
                             UsefulMethods.normalizeString(inputCargo)))
                     .findAny()
-                    .orElse(null);
+                    .orElse(Funcionario.class);
             cargo = filteredCargo;
 
             invalidCargo =
@@ -66,9 +60,9 @@ public class AdicionarFuncionario implements UserOption {
 
         funcionarioContext.setContext(cargo);
 
-        Funcionario funcionario = funcionarioContext.cadastrarFuncionario();
+        abstractClasses.Funcionario funcionario = funcionarioContext.cadastrarFuncionario();
 
-        Funcionario funcionarioCadastrado = empresa.adicionarFuncionario(funcionario);
+        abstractClasses.Funcionario funcionarioCadastrado = empresa.adicionarFuncionario(funcionario);
 
         if((Integer) funcionarioCadastrado.getID() != null){
             System.out.println("\n" + UsefulMethods.capitalize(cargo.getSimpleName()) + " cadastrado(a) com sucesso!");
@@ -80,7 +74,7 @@ public class AdicionarFuncionario implements UserOption {
 
     public static boolean funcionarioAlreadyExists(int id){
 
-        List<Funcionario> filteredFuncionario =
+        List<abstractClasses.Funcionario> filteredFuncionario =
                 AdicionarFuncionario.empresa.funcionarios.stream()
                 .filter(funcionario ->  id == funcionario.getID()).toList();
 

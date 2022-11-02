@@ -2,18 +2,15 @@ package services;
 
 import abstractClasses.Funcionario;
 import interfaces.FuncionarioDeAltoCargo;
-import interfaces.IEmpresaService;
+import interfaces.EmpresaService;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
 import java.util.function.Predicate;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
-public class Empresa implements IEmpresaService {
+public class Empresa implements EmpresaService {
 
     public final List<Funcionario> funcionarios = new ArrayList<Funcionario>();
 

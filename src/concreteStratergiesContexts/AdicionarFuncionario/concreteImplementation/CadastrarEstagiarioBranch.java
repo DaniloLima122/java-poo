@@ -21,7 +21,7 @@ public class CadastrarEstagiarioBranch extends AddFuncionarioCommonInputs implem
 
         boolean invalid_vale_coxinha = true;
 
-        while((Double) vale_coxinha == null || vale_coxinha < 0) {
+        while(invalid_vale_coxinha) {
 
             try {
 

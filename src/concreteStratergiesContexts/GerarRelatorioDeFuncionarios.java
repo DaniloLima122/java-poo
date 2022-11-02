@@ -4,9 +4,7 @@ import interfaces.UserOption;
 import services.Empresa;
 
 public class GerarRelatorioDeFuncionarios implements UserOption {
-
     private final Empresa empresa;
-
     public GerarRelatorioDeFuncionarios(final Empresa empresa) {
         this.empresa = empresa;
     }

@@ -3,7 +3,6 @@ package entities;
 import abstractClasses.Funcionario;
 
 public class Estagiario extends Funcionario {
-
     private double vale_coxinha;
 
     public double getVale_coxinha() {
@@ -18,7 +17,6 @@ public class Estagiario extends Funcionario {
         this.setVale_coxinha(vale_coxinha);
     }
     public double getSalario(){
-        // Calcula o salário líquido
         return(this.salario+this.getVale_coxinha());
     }
 }

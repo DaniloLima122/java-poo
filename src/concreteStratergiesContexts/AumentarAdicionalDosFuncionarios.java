@@ -1,6 +1,5 @@
 package concreteStratergiesContexts;
 
-import concreteStratergiesContexts.AdicionarFuncionario.concreteImplementation.AdicionarFuncionario;
 import interfaces.UserOption;
 import services.Empresa;
 
